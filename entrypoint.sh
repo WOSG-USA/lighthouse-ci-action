@@ -197,7 +197,7 @@ export PUPPETEER_EXECUTABLE_PATH='/usr/bin/google-chrome-stable'
 export LHCI_BUILD_CONTEXT__CURRENT_HASH="$GITHUB_SHA"
 
 # Optional setup for LHCI Server
-if [[ -n "$LHCI_SERVER_URL" ]]; then
+if [[ -n "${LHCI_SERVER_URL+x}" ]]; then
   log "Using LHCI Server: $LHCI_SERVER_URL"
   target="lhci"
   serverBaseUrl="${LHCI_SERVER_URL}"
