@@ -34,6 +34,10 @@ export SHOP_ACCESS_TOKEN="$INPUT_ACCESS_TOKEN"
 [[ -n "$INPUT_LHCI_MIN_SCORE_PERFORMANCE" ]]   && export LHCI_MIN_SCORE_PERFORMANCE="$INPUT_LHCI_MIN_SCORE_PERFORMANCE"
 [[ -n "$INPUT_LHCI_MIN_SCORE_ACCESSIBILITY" ]] && export LHCI_MIN_SCORE_ACCESSIBILITY="$INPUT_LHCI_MIN_SCORE_ACCESSIBILITY"
 
+# Optional, these are used to configure LHCI server
+[[ -n "$INPUT_LHCI_SERVER_URL" ]]     && export LHCI_SERVER_URL="$INPUT_LHCI_SERVER_URL"
+[[ -n "$INPUT_LHCI_BUILD_TOKEN" ]]     && export LHCI_BUILD_TOKEN="$INPUT_LHCI_BUILD_TOKEN"
+
 # Add global node bin to PATH (from the Dockerfile)
 export PATH="$PATH:$npm_config_prefix/bin"
 
@@ -192,6 +196,16 @@ min_score_accessibility="${LHCI_MIN_SCORE_ACCESSIBILITY:-0.9}"
 export PUPPETEER_EXECUTABLE_PATH='/usr/bin/google-chrome-stable'
 export LHCI_BUILD_CONTEXT__CURRENT_HASH="$GITHUB_SHA"
 
+# Optional setup for LHCI Server
+if [[ -n "$LHCI_SERVER_URL" ]]; then
+  log "Using LHCI Server: $LHCI_SERVER_URL"
+  target="lhci"
+  serverBaseUrl="${LHCI_SERVER_URL}"
+else
+  target="temporary-public-storage"
+  serverBaseUrl=""
+fi
+
 cat <<- EOF > lighthouserc.yml
 ci:
   collect:
@@ -208,8 +222,8 @@ ci:
         - "--disable-dev-shm-usage"
         - "--disable-gpu"
   upload:
-    target: lhci
-    serverBaseUrl: "https://lhci-server-886726508548.us-central1.run.app"
+    target: $target
+    serverBaseUrl: $serverBaseUrl
   assert:
     assertions:
       "categories:performance":
