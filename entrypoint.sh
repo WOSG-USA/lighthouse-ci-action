@@ -201,9 +201,11 @@ if [[ -n "${LHCI_SERVER_URL+x}" ]]; then
   log "Using LHCI Server: $LHCI_SERVER_URL"
   target="lhci"
   serverBaseUrl="${LHCI_SERVER_URL}"
+  token="${LHCI_BUILD_TOKEN}"
 else
   target="temporary-public-storage"
   serverBaseUrl=""
+  token=""
 fi
 
 cat <<- EOF > lighthouserc.yml
@@ -224,6 +226,7 @@ ci:
   upload:
     target: $target
     serverBaseUrl: $serverBaseUrl
+    token: $token
   assert:
     assertions:
       "categories:performance":
