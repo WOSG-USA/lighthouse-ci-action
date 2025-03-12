@@ -195,6 +195,7 @@ min_score_accessibility="${LHCI_MIN_SCORE_ACCESSIBILITY:-0.9}"
 # export PUPPETEER_CACHE_DIR=/root/.cache/puppeteer
 export PUPPETEER_EXECUTABLE_PATH='/usr/bin/google-chrome-stable'
 export LHCI_BUILD_CONTEXT__CURRENT_HASH="$GITHUB_SHA"
+export LHCI_BUILD_CONTEXT__AUTHOR="WOS"
 
 # Optional setup for LHCI Server
 if [[ -n "${LHCI_SERVER_URL+x}" ]]; then
