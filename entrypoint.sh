@@ -208,7 +208,8 @@ ci:
         - "--disable-dev-shm-usage"
         - "--disable-gpu"
   upload:
-    target: temporary-public-storage
+    target: lhci
+    serverBaseUrl: "https://lhci-server-886726508548.us-central1.run.app"
   assert:
     assertions:
       "categories:performance":
