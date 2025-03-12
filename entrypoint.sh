@@ -202,6 +202,7 @@ if [[ -n "${LHCI_SERVER_URL+x}" ]]; then
   target="lhci"
   serverBaseUrl="${LHCI_SERVER_URL}"
   token="${LHCI_BUILD_TOKEN}"
+  export LHCI_BUILD_CONTEXT__COMMIT_MESSAGE="$GITHUB_SHA"
 else
   target="temporary-public-storage"
   serverBaseUrl=""
