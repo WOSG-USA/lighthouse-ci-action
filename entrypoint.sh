@@ -205,7 +205,7 @@ if [[ -n "${LHCI_SERVER_URL+x}" ]]; then
   token="${LHCI_BUILD_TOKEN}"
   export LHCI_BUILD_CONTEXT__COMMIT_MESSAGE="$GITHUB_SHA"
   export LHCI_BUILD_CONTEXT__AVATAR_URL="https://avatars.githubusercontent.com/u/178208607?s=400&u=b168b7b54c29d660c1097d290770cd4ab9140163&v=4"
-  export LHCI_BUILD_CONTEXT__COMMIT_TIME=${date +"%Y-%m-%dT%H:%M:%S%z"}
+  export LHCI_BUILD_CONTEXT__COMMIT_TIME=$(date +"%Y-%m-%dT%H:%M:%S%z")
 else
   target="temporary-public-storage"
   serverBaseUrl=""
