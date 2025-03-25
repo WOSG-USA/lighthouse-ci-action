@@ -49,6 +49,22 @@ inputs:
     description: 'Minimum accessibility score'
     required: false
     default: 0.9
+  github_actor:
+    description: 'GitHub actor'
+    required: false
+  github_token:
+    description: 'GitHub personal access token'
+    required: false
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "composite"
+  steps:
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ inputs.github_actor }}
+        password: ${{ inputs.github_token }}
+    - name: docker
+      uses: docker://ghcr.io/wosg-usa/lighthouse-ci-action:latest
+      with:
+        entrypoint: /entrypoint.sh
