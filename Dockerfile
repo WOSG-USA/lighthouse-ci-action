@@ -1,4 +1,4 @@
-FROM cpclermont/lighthouse-ci-action:2.0.0
+FROM ghcr.io/wosg-usa/lighthouse-ci-action:latest
 RUN npm install -g @shopify/cli @shopify/theme
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

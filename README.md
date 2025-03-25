@@ -66,3 +66,10 @@ For the GitHub Status Checks on PR. One of the two arguments is required:
 * `lhci_github_token` - (optional) GitHub personal access token
 
 For more details on the implications of choosing one over the other, refer to the [Lighthouse CI Getting Started Page](https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md#github-status-checks)
+
+
+## Build and Push custom Docker container to Github Registry for use in Docker file
+1. Edit `Dockerfile.base`
+2. Build image `docker build -f Dockerfile.base .`
+3. Tag image `docker tag SHA ghcr.io/WOSG-USA/lighthouse-ci-action:latest`
+4. Push image `docker push ghcr.io/wosg-usa/lighthouse-ci-action:latest`
